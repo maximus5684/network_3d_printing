@@ -36,6 +36,7 @@ namespace Network3DPrinting
   {
     // wxWidgets Init
     frame = new BrowserFrame("Network 3D Printing Browser", wxPoint(50, 50), wxSize(450, 340));
+    frame->CenterOnScreen();
     frame->Show(true);
 
     SetTopWindow(frame);
