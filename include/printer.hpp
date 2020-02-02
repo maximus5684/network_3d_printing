@@ -18,54 +18,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef N3DP_BROWSER_HPP
-#define N3DP_BROWSER_HPP
+#ifndef PRINTER_HPP_
+#define PRINTER_HPP_
 
-#include <memory>
-#include <cstdio>
-#include <mutex>
 #include <map>
-#include <iomanip>
-
-#include <wx/wxprec.h>
-#ifndef WX_PRECOMP
-  #include <wx/wx.h>
-#endif
+#include <string>
 
 namespace Network3DPrinting
 {
-class BrowserFrame
-  : public wxFrame
+class Printer
 {
 public:
-  BrowserFrame(
-    const wxString& title,
-    const wxPoint& pos,
-    const wxSize& size);
+  Printer(std::string && model, uint32_t port);
+  virtual ~Printer();
+  virtual std::map<std::string, uint32_t> get_files(std::string folder = "") = 0;
 
 private:
-  void InitUI();
-  void OnExit(wxCommandEvent& event);
-
-  wxDECLARE_EVENT_TABLE();
+  std::string model_name_;
+  uint32_t udp_port_;
 };
 
-class Browser
-  : public wxApp
+class QidiTechXPro :
+  public Printer
 {
 public:
-  virtual bool OnInit();
-
-private:
-  BrowserFrame* frame;
+  QidiTechXPro();
+  ~QidiTechXPro();
+  std::map<std::string, uint32_t> get_files(std::string folder = "");
 };
-
-wxBEGIN_EVENT_TABLE(BrowserFrame, wxFrame)
-  EVT_MENU(wxID_EXIT, BrowserFrame::OnExit)
-wxEND_EVENT_TABLE()
 }  // namespace Network3DPrinting
 
-wxIMPLEMENT_APP(Network3DPrinting::Browser);
-wxDECLARE_APP(Network3DPrinting::Browser);
-
-#endif  // N3DP_BROWSER_HPP
+#endif  // PRINTER_HPP_

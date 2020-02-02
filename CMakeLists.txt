@@ -27,6 +27,7 @@ include("${wxWidgets_USE_FILE}")
 
 add_executable(${PROJECT_NAME}_browser
   src/browser.cpp
+  src/printer.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}_browser
