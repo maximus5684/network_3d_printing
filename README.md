@@ -1,4 +1,5 @@
 # 3D Printer Network File Browser #
+[![CircleCI](https://circleci.com/gh/maximus5684/network_3d_printing.svg?style=svg)](https://circleci.com/gh/maximus5684/network_3d_printing)
 
 A C++ application which allows you to browse files on the SD card or USB stick
 in (some) network-connected 3D printers. The supported list of printers includes:
